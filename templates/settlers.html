@@ -8,13 +8,15 @@ and modified.
     <title>Settlers of Catan</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="static/settlers.css"/>
-    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="static/img/grain_cc.jpg">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="static/script.js"></script>
+    <script src="static/settlers.js"></script>
   </head>
 
   <body>
     <div class="container">
+
+      <!-- Side board -->
       <div class="side-board">
 
         <div class='section'>
@@ -22,12 +24,10 @@ and modified.
             Dice
           </div>
           <div class='dice'>
-            <div class='die'></div>
-            <div class='die'></div>
+            <div class='die' id="die1"></div>
+            <div class='die' id="die2"></div>
           </div>
-          <form method='get' action="/roll_dice">
-            <input type="submit" value="Roll the dice" class='roll-button'>
-          </form>
+          <input type="submit" value="Roll the dice" class='roll-button' onclick="roleDice()">
         </div>
 
         <div class='section'>
@@ -35,13 +35,13 @@ and modified.
             Tokens
           </div>
           <div class='tokens'>
-            <div class='road'>
+            <div class='token road'>
               <div class='number'>15</div>
             </div>
-            <div class='settlement'>
+            <div class='token settlement'>
               <div class='number'>5</div>
             </div>
-            <div class='city'>
+            <div class='token city'>
               <div class='number'>4</div>
             </div>
           </div>
@@ -52,14 +52,14 @@ and modified.
             Draw Pile
           </div>
           <div class='draw-pile-row'>
-            <div class='resource-card wood' onclick='drawResource("wood")'></div>
-            <div class='resource-card clay' onclick='drawResource("clay")'></div>
-            <div class='resource-card grain' onclick='drawResource("grain")'></div>
+            <div class='resource-card wood' onclick='drawResourceCard("wood")'></div>
+            <div class='resource-card clay' onclick='drawResourceCard("clay")'></div>
+            <div class='resource-card grain' onclick='drawResourceCard("grain")'></div>
           </div>
           <div class='draw-pile-row'>
-            <div class='resource-card sheep' onclick='drawResource("sheep")'></div>
-            <div class='resource-card ore' onclick='drawResource("ore")'></div>
-            <div class='resource-card development' onclick='drawResource("development")'></div>
+            <div class='resource-card sheep' onclick='drawResourceCard("sheep")'></div>
+            <div class='resource-card ore' onclick='drawResourceCard("ore")'></div>
+            <div class='resource-card development' onclick='drawResourceCard("development")'></div>
           </div>
         </div>
 
@@ -69,19 +69,19 @@ and modified.
             </div>
             <div class='resource-card-row'>
               <div class='resource-card wood'>
-                <div class='number'>0</div>
+                <div class='number' onclick='discardResourceCard("wood")'>0</div>
               </div>
               <div class='resource-card clay'>
-                <div class='number'>0</div>
+                <div class='number' onclick='discardResourceCard("clay")'>0</div>
               </div>
               <div class='resource-card grain'>
-                <div class='number'>0</div>
+                <div class='number' onclick='discardResourceCard("grain")'>0</div>
               </div>
               <div class='resource-card sheep'>
-                <div class='number'>0</div>
+                <div class='number' onclick='discardResourceCard("sheep")'>0</div>
               </div>
               <div class='resource-card ore'>
-                <div class='number'>0</div>
+                <div class='number' onclick='discardResourceCard("ore")'>0</div>
               </div>
             </div>
 

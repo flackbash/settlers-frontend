@@ -385,118 +385,8 @@
 }
 /* end cities */
 /* ----------------------------------------- */
-/* TODO: finish the colors */
-.hex .house.blue {
-    background-color: var(--player1-color);
-}
-.hex .city.blue {
-    background-color: var(--player1-color);
-}
-.hex .house.red {
-    background-color: var(--player2-color);
-}
-.hex .city.red {
-    background-color: var(--player2-color);
-}
-
-.blue {
-    background: var(--player1-color);
-    /* background: linear-gradient(to bottom, #49c0f0 0%, #2cafe3 100%); */
-}
-.red {
-    background: var(--player2-color);
-    /* background: linear-gradient(to bottom, #ff3019 0%, #cf0404 100%); */
-}
-.yellow {
-    background: var(--player3-color);
-    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
-}
-.green {
-    background: var(--player4-color);
-    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
-}
-
-.roster {
-    border-radius: 7px;
-    height: 195px;
-    width: 300px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background-color: #f3e28a;
-}
-
-.player-roster-list {
-    margin: 0px;
-    padding: 2px;
-}
-.player-roster.current-player {
-    border-right: 4px solid black;
-    border-left: 4px solid black;
-}
- .player-roster {
-	 display: block;
-	 left: 0px;
-	 right: 0px;
-	 border-radius: 5px;
-	 margin: 5px;
-	 padding: 2px;
-	 background-color: red;
-	 position: relative;
-}
- .player-roster .points {
-	 right: 15px;
-	 top: 2px;
-	 position: absolute;
-	 border-radius: 5px;
-}
- .player-roster .points::after {
-	 content: " points";
-}
- .roster-card-bank {
-	 margin-left: 20px;
-}
- .roster-card-stack {
-	 float: left;
-	 margin: 0px;
-	 padding: 0px;
-	 margin-right: 20px;
-}
- .roster-card {
-	 display: block;
-	 height: 30px;
-	 width: 20px;
-	 border: 1px solid black;
-	 border-radius: 5px;
-	 float: left;
-	 margin-left: -15px;
-	 background-color: #e7dece;
-}
-.clear {
-    clear: both;
-}
-
-
- .action-prompt {
-	 position: absolute;
-	 top: 0px;
-	 left: 50%;
-	 margin-left: -200px;
-	 width: 400px;
-	 height: 50px;
-	 border: 1px solid black;
-	 background: linear-gradient(to bottom, #ffd65e 0%, #febf04 100%);
-	 line-height: 50px;
-	 z-index: 1;
-	 color: white;
-	 font-weight: 700;
-	 text-align: center;
-	 border-radius: 10px;
-	 opacity: 0.85;
-}
-
-
-/* Side Board */
+/* ----------------------------------------- */
+/* begin side board */
 
 .side-board {
     border-radius: 7px;
@@ -513,6 +403,7 @@
     border-radius: 7px;
     width: 100%;
     position: relative;
+    z-index: 1000
 }
 
 .section-header {
@@ -525,43 +416,43 @@
     background-color: var(--player2-color);
 }
 
+/* Tokens */
 .tokens {
     display:flex;
-    width: 70%;
+    width: 100%;
     margin:auto;
+    border: 3px solid transparent;
 }
 
-.tokens .road {
-    width: 70px;
-    height: 70px;
+.token {
+    width: 90px;
+    height: 90px;
     white-space:nowrap;
     position: relative;
     margin-left: auto;
     margin-right: auto;
+    background-color: #f2f2de;
     background-size: cover;
+    background-image: url(img/road2.png);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    cursor: pointer;
+}
+
+.token .road {
     background-image: url(img/road.png);
 }
 
-.tokens .settlement {
-    width: 50px;
-    height: 50px;
-    white-space:nowrap;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background-size: cover;
+.token .settlement {
     background-image: url(img/settlement.png);
 }
 
 .tokens .city {
-    width: 70px;
-    height: 70px;
-    white-space:nowrap;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    background-size: cover;
     background-image: url(img/city.png);
+}
+
+.token:hover {
+    border: 3px solid black;
 }
 
 .tokens .number {
@@ -571,16 +462,15 @@
     height: 30px;
     width: 30px;
     border-radius: 30px;
+    border: 1px solid black;
     background-color: white;
     font-size: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
+    bottom: 5%;
+    right: 5%;
 }
 
+/* Dice */
 .dice {
     display:flex;
     width: 60%;
@@ -603,15 +493,27 @@
     margin: auto;
     width: 60%;
     display: flex;
-
+    text-align: center;
+    cursor: pointer;
 }
 
+/* Draw pile */
 .draw-pile-row {
     display:flex;
     width: 60%;
     margin: auto;
 }
 
+.draw-pile-row .resource-card {
+    cursor: pointer;
+    border: 3px solid transparent;
+}
+
+.draw-pile-row .resource-card:hover {
+    border: 3px solid white;
+}
+
+/* Resource cards */
 .resource-card-row {
     display: flex;
     width: 100%;
@@ -626,8 +528,9 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
+
 .resource-card.grain {
     background-size: cover;
     background-image: url(img/grain_cc.jpg);
@@ -683,4 +586,55 @@
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+    cursor: pointer;
+    border: 3px solid transparent
+}
+
+.resource-card .number:hover {
+    border: 3px solid black;
+}
+
+/* end side board */
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/* begin colors */
+
+.hex .house.blue {
+    background-color: var(--player1-color);
+}
+
+.hex .city.blue {
+    background-color: var(--player1-color);
+}
+
+.hex .house.red {
+    background-color: var(--player2-color);
+}
+
+.hex .city.red {
+    background-color: var(--player2-color);
+}
+
+.blue {
+    background: var(--player1-color);
+    /* background: linear-gradient(to bottom, #49c0f0 0%, #2cafe3 100%); */
+}
+
+.red {
+    background: var(--player2-color);
+    /* background: linear-gradient(to bottom, #ff3019 0%, #cf0404 100%); */
+}
+
+.yellow {
+    background: var(--player3-color);
+    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
+}
+
+.green {
+    background: var(--player4-color);
+    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
+}
+
+.clear {
+    clear: both;
 }
