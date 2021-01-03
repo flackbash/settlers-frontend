@@ -1,10 +1,9 @@
 import argparse
 import json
-
 from flask import Flask, render_template, request
 
-from settlers_server.src.colonization.dice import roll_two_dice
-from settlers_server.src.colonization.table import Table
+from src.settlers_server.src.settlers.table import Table
+from src.settlers_server.src.settlers.dice import roll_two_dice
 
 app = Flask(__name__)
 
@@ -27,7 +26,7 @@ def get_dice_roll():
 
 @app.route('/draw_development_card')
 def draw_development_card():
-    player_id = request.args.get("player")
+    player_id = request.args.get("player_id")
     text = table.draw_development_card(player_id)
     response = dict()
     response["development_card"] = dict()
