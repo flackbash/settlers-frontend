@@ -1,0 +1,489 @@
+<!--
+Taken from https://codepen.io/allenrice/pen/IgKGJ (which in turn was forked from https://codepen.io/MattH22/pen/pqFLJ)
+and modified.
+-->
+
+<html>
+  <head>
+    <title>Settlers of Catan</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="static/settlers.css"/>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="static/script.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="side-board">
+
+        <div class='section'>
+          <div class="section-header">
+            Dice
+          </div>
+          <div class='dice'>
+            <div class='die'></div>
+            <div class='die'></div>
+          </div>
+          <form method='get' action="/roll_dice">
+            <input type="submit" value="Roll the dice" class='roll-button'>
+          </form>
+        </div>
+
+        <div class='section'>
+          <div class="section-header">
+            Tokens
+          </div>
+          <div class='tokens'>
+            <div class='road'>
+              <div class='number'>15</div>
+            </div>
+            <div class='settlement'>
+              <div class='number'>5</div>
+            </div>
+            <div class='city'>
+              <div class='number'>4</div>
+            </div>
+          </div>
+        </div>
+
+        <div class='section'>
+          <div class="section-header">
+            Draw Pile
+          </div>
+          <div class='draw-pile-row'>
+            <div class='resource-card wood' onclick='drawResource("wood")'></div>
+            <div class='resource-card clay' onclick='drawResource("clay")'></div>
+            <div class='resource-card grain' onclick='drawResource("grain")'></div>
+          </div>
+          <div class='draw-pile-row'>
+            <div class='resource-card sheep' onclick='drawResource("sheep")'></div>
+            <div class='resource-card ore' onclick='drawResource("ore")'></div>
+            <div class='resource-card development' onclick='drawResource("development")'></div>
+          </div>
+        </div>
+
+          <div class='section'>
+            <div class="section-header">
+              Player Resources
+            </div>
+            <div class='resource-card-row'>
+              <div class='resource-card wood'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card clay'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card grain'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card sheep'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card ore'>
+                <div class='number'>0</div>
+              </div>
+            </div>
+
+            <div class='resource-card-row'>
+              <div class='resource-card knight'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card point'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card monopoly'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card progress'>
+                <div class='number'>0</div>
+              </div>
+              <div class='resource-card roadwords'>
+                <div class='number'>0</div>
+              </div>
+            </div>
+          <div class='clear'></div>
+        </div>
+      </div>
+
+      <ol class="even">
+        <li class='hex spacer'></li>
+        <li class='hex water'></li>
+        <li class='hex water'>
+          <div class='harbor two-one wood'>
+            <div class='harbor-piece br'></div>
+          </div>
+        </li>
+        <li class='hex water'></li>
+        <li class='hex water'>
+          <div class='harbor three-one wood'>
+            <div class='harbor-piece bl'></div>
+          </div>
+        </li>
+      </ol>
+
+      <ol class="odd">
+        <li class='hex spacer'></li>
+        <li class='hex water'>
+          <div class='harbor three-one sheep'>
+            <div class='harbor-piece br'></div>
+          </div>
+        </li>
+        <li class='hex wheat'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number two'></div>
+          <div class='road tr'></div>
+          <div class='road l'></div>
+          <div class='road tl'></div>
+        </li>
+        <li class='hex wood'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number three'></div>
+          <div class='road tl'></div>
+          <div class='road l'></div>
+          <div class='road tr'></div>
+        </li>
+        <li class='hex wheat'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number three'></div>
+          <div class='road tl'></div>
+          <div class='road tr'></div>
+
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house tl target'></div>
+        </li>
+      </ol>
+
+      <ol class="even">
+        <li class='hex water'></li>
+        <li class='hex coal'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number four'></div>
+          <div class='road tr'></div>
+        </li>
+        <li class='hex sheep'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number four'></div>
+          <div class='house tl red'></div>
+        </li>
+        <li class='hex wood'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number five'></div>
+        </li>
+        <li class='hex sheep'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number five'></div>
+          <div class='house t blue'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house tl target'></div>
+          <div class='harbor three-one brick'>
+            <div class='harbor-piece l'></div>
+          </div>
+        </li>
+      </ol>
+
+      <ol class="odd">
+        <li class='hex water'>
+          <div class='harbor three-one sheep'>
+            <div class='harbor-piece r'></div>
+          </div>
+        </li>
+        <li class='hex sheep'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number six'></div>
+        </li>
+        <li class='hex wheat'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number six'></div>
+        </li>
+        <li class='hex wood'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number eight robber'></div>
+        </li>
+        <li class='hex brick'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number eight'></div>
+        </li>
+        <li class='hex brick'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number nine'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house tl target'></div>
+        </li>
+      </ol>
+
+      <ol class="even">
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+        </li>
+        <li class='hex coal'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number nine'></div>
+        </li>
+        <li class='hex brick'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number ten'></div>
+        </li>
+        <li class='hex wood'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number ten'></div>
+        </li>
+        <li class='hex sheep'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number eleven'></div>
+          <div class='city t blue'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tl'></div>
+          <div class='road target l'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <div class='harbor three-one brick'>
+            <div class='harbor-piece l'></div>
+          </div>
+        </li>
+      </ol>
+
+      <ol class="odd">
+        <li class='hex spacer'></li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='harbor two-one any'>
+            <div class='harbor-piece tr'></div>
+          </div>
+        </li>
+        <li class='hex sand'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+        </li>
+        <li class='hex coal'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number twelve'></div>
+        </li>
+        <li class='hex wheat'>
+          <!-- ROAD TARGETS -->
+          <div class='road target l'></div>
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <!-- BANDIT TARGET -->
+          <!-- NUMBER -->
+          <div class='number eight'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tl'></div>
+          <div class='road target l'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <div class='city tl red'></div>
+        </li>
+      </ol>
+
+      <ol class="even">
+        <li class='hex spacer'></li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <div class='harbor two-one any'>
+            <div class='harbor-piece tr'></div>
+          </div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tl'></div>
+          <div class='road target tr'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+        </li>
+        <li class='hex water'>
+          <!-- ROAD TARGETS -->
+          <div class='road target tl'></div>
+          <!-- HOUSE TARGETS -->
+          <div class='house t target'></div>
+          <div class='house tl target'></div>
+          <div class='harbor three-one wood'>
+            <div class='harbor-piece tl'></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
