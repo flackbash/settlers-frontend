@@ -1,0 +1,4 @@
+[submodule "src/settlers_server"]
+	path = src/settlers_server
+	url = https://github.com/kyrashelwo/settlers_server.git
+	branch = main
