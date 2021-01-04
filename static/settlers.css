@@ -433,21 +433,20 @@
     margin-right: auto;
     background-color: #f2f2de;
     background-size: cover;
-    background-image: url(img/road2.png);
     border-radius: 10px;
     border: 3px solid transparent;
     cursor: pointer;
 }
 
-.token .road {
+.token.road {
     background-image: url(img/road.png);
 }
 
-.token .settlement {
+.token.settlement {
     background-image: url(img/settlement.png);
 }
 
-.tokens .city {
+.token.city {
     background-image: url(img/city.png);
 }
 
