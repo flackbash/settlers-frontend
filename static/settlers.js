@@ -9,6 +9,27 @@ var URL_ROLE_DICE = basePath + "get_dice_roll";
 // TODO: Adjust player id. Where to store it?
 var player_id = "p1";
 
+// Token placement variables: 1: road, 2: settlement, 3: city
+var token_selected = 0;
+
+/*
+ * Select a token.
+ */
+function toggleSelectToken(type, element) {
+  // Remove class 'selected' from all tokens
+  $('.token').each(function(i, obj){
+    $(obj).removeClass('selected');
+  });
+
+  // Toggle selection
+  if (token_selected != type) {
+    token_selected = type;
+    $(element).addClass('selected');
+  } else {
+    token_selected = 0;
+  }
+}
+
 /*
  * Send request to server to draw a resource card and display result.
  */
