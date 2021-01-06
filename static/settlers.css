@@ -218,19 +218,19 @@
 /* ----------------------------------------- */
 /* ----------------------------------------- */
 /* begin numbers */
- .hex .number {
-	 position: absolute;
-	 line-height: 44px;
-	 text-align: center;
-	 z-index: 200;
-	 height: 45px;
-	 width: 45px;
-	 border-radius: 45px;
+.hex .number {
+    position: absolute;
+    line-height: 44px;
+    text-align: center;
+    z-index: 200;
+    height: 45px;
+    width: 45px;
+    border-radius: 45px;
 
-	 top: 42px;
-	 left: 18px;
-	 transform: rotate(90deg);
-	 background-color: white;
+    top: 42px;
+    left: 18px;
+    transform: rotate(90deg);
+    background-color: white;
 }
 
 .hex .number.robber {
@@ -469,6 +469,11 @@
     position: absolute;
     bottom: 5%;
     right: 5%;
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 /* Dice */
@@ -589,6 +594,11 @@
     transform: translateX(-50%) translateY(-50%);
     cursor: pointer;
     border: 3px solid transparent
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 .resource-card .number:hover {
