@@ -1,11 +1,12 @@
 :root {
     --hover-target-color: #495e5e;
     --background-color: #7b9e9e;
+    --sideboard-color: #f3e28a;
     --player1-color: #0a1eb0;
     --player2-color: #6f1515;
     --player3-color: #f6b20c;
     --player4-color: #7cf022;
-    --token-selected-color: #f0e578;
+    --token-selected-color: #f6eaad;
     --token-color: #f2f2de;
 }
 /* ----------------------------------------- */
@@ -390,7 +391,7 @@
     width: 350px;
     position: absolute;
     right: 10px;
-    background-color: #f3e28a;
+    background-color: var(--sideboard-color);
     margin-top: 10px
     margin-bottom: 10px
 }
