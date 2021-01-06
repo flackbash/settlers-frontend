@@ -145,6 +145,26 @@ function getDieImageUrl(number) {
     return baseUrl + filename;
 }
 
+function getCoordinates(element) {
+  // Get x and y coordinates
+  var id = $(element).parent().attr('id');
+  var coords = id.split("_");
+  var x = parseInt(coords[0]);
+  var y = parseInt(coords[1]);
+
+  // Get offset
+  var classList = $(element).attr('class').split(/\s+/);
+  var possibleOffsets = ["tl", "l", "tr", "t"];
+  var offset = "";
+  possibleOffsets.forEach(function(offs) {
+    if (jQuery.inArray(offs, classList) != -1) {
+      offset = offs;
+    }
+  });
+
+  return {"x": x, "y": y, "offset": offset};
+}
+
 $(document).ready(function(){
 
   // OnClickListener for roads (targets and existing roads)
@@ -152,24 +172,10 @@ $(document).ready(function(){
     if (selectedToken != 'road') {
       return;
     }
-    // Get x and y coordinates of the road
-    var id = $(this).parent().attr('id');
-    var coords = id.split("_");
-    var x = parseInt(coords[0]);
-    var y = parseInt(coords[1]);
 
-    // Get offset
-    var classList = $(this).attr('class').split(/\s+/);
-    var possibleOffsets = ["tl", "l", "tr"];
-    var offset = "";
-    possibleOffsets.forEach(function(offs) {
-      if (jQuery.inArray(offs, classList) != -1) {
-        offset = offs;
-      }
-    });
-
-    // Prepare parameters for request to server
-    var params = {"x": x, "y": y, "offset": offset, "player_id": playerId};
+    // Retrieve coordinates of the clicked object and prepare parameters
+    var params = getCoordinates(this);
+    params["player_id"] = playerId;
     params = $.param(params);
 
     var url = URL_ROAD_POSITION_CLICKED + "?" + params;
@@ -191,6 +197,49 @@ $(document).ready(function(){
         roadObj.addClass(playerColor);
       } else {
         console.log("Remove road");
+        roadObj.addClass("target");
+        roadObj.addClass("selectable");
+        playerColorList.forEach(function(color) {
+          roadObj.removeClass(color)
+        });
+      }
+    });
+  });
+
+  // OnClickListener for settlements (targets and existing settlements)
+  $(".hex .settlement").click(function(){
+    if (selectedToken != "settlement" && selectedToken != "city") {
+      return;
+    }
+
+    // Retrieve coordinates of the clicked object and prepare parameters
+    var params = getCoordinates(this);
+    params["player_id"] = playerId;
+    // TODO: think about how to differentiate between settlement and village
+    params["type"] =  "village";  // selectedToken;
+    console.log("result: " + params["x"] + ", " + params["offset"]);
+    params = $.param(params);
+
+    var url = URL_SETTLEMENT_POSITION_CLICKED + "?" + params;
+
+    $.getJSON(url, function(jsonObj) {
+      var resX = jsonObj["x"];
+      var resY = jsonObj["y"];
+      var resOffset = jsonObj["offset"];
+      // TODO: Deal with player id
+      var resPlayerId = jsonObj["player_id"];
+      var resType = jsonObj["type"];
+      console.log("result: " + resX + ", " + resY + ", " + resOffset + ", " + resPlayerId + ", " + resType);
+
+      // Display settlement/city or target at specified position.
+      var hexId = resX + "_" + resY;
+      var roadObj = $("#" + hexId).children(".settlement." + resOffset)
+      if (resPlayerId != null) {
+        console.log("Add settlement");
+        roadObj.removeClass("target");
+        roadObj.addClass(playerColor);
+      } else {
+        console.log("Remove settlement");
         roadObj.addClass("target");
         roadObj.addClass("selectable");
         playerColorList.forEach(function(color) {
