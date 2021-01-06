@@ -188,7 +188,7 @@ $(document).ready(function(){
       if (resPlayerId != null) {
         console.log("Add road");
         roadObj.removeClass("target");
-        // roadObj.addClass(playerColor);
+        roadObj.addClass(playerColor);
       } else {
         console.log("Remove road");
         roadObj.addClass("target");

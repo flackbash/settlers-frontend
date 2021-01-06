@@ -101,7 +101,6 @@
 /* begin roads */
 .hex .road {
 	 border-radius: 3px;
-	 background-color: red;
 	 position: absolute;
 	 width: 9px;
 	 height: 58px;
@@ -600,40 +599,20 @@
 /* ----------------------------------------- */
 /* begin colors */
 
-.hex .settlement.blue {
-    background-color: var(--player1-color);
-}
-
-.hex .city.blue {
-    background-color: var(--player1-color);
-}
-
-.hex .settlement.red {
-    background-color: var(--player2-color);
-}
-
-.hex .city.red {
-    background-color: var(--player2-color);
-}
-
 .blue {
-    background: var(--player1-color);
-    /* background: linear-gradient(to bottom, #49c0f0 0%, #2cafe3 100%); */
+    background-color: var(--player1-color);
 }
 
 .red {
-    background: var(--player2-color);
-    /* background: linear-gradient(to bottom, #ff3019 0%, #cf0404 100%); */
+    background-color: var(--player2-color);
 }
 
 .yellow {
-    background: var(--player3-color);
-    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
+    background-color: var(--player3-color);
 }
 
 .green {
-    background: var(--player4-color);
-    /* background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%); */
+    background-color: var(--player4-color);
 }
 
 .clear {
