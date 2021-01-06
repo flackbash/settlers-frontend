@@ -2,6 +2,8 @@ import argparse
 import json
 from flask import Flask, render_template, request
 
+from src.settlers_server.src.settlers.settlement_board import SettlementBoard
+from src.settlers_server.src.settlers.street_board import StreetBoard
 from src.settlers_server.src.settlers.table import Table
 from src.settlers_server.src.settlers.dice import roll_two_dice
 
@@ -9,7 +11,10 @@ app = Flask(__name__)
 
 default_response = json.dumps('{"test": "ok"}')
 
-table = Table(["p1", "p2", "p3"])
+players = ["p1", "p2", "p3"]
+table = Table(players)
+street_board = StreetBoard(players)
+settlement_board = SettlementBoard(players)
 
 
 @app.route("/")
@@ -54,6 +59,28 @@ def discard_resource_card():
     print("player_id: ", player_id)
     print("type: ", resource_type)
     return json.dumps({"success": "true"})
+
+
+@app.route('/select_road_position')
+def select_road_position():
+    player_id = request.args.get("player_id")
+    x = int(request.args.get("x"))
+    y = int(request.args.get("y"))
+    offset = request.args.get("offset")
+    result = street_board.position_selected(player_id, (x,y,offset))
+    print(result)
+    return json.dumps(result)
+
+
+@app.route('/select_settlement_position')
+def select_settlement_position():
+    player_id = request.args.get("player_id")
+    x = int(request.args.get("x"))
+    y = int(request.args.get("y"))
+    offset = request.args.get("offset")
+    settlement_type = request.args.get("type")
+    result = settlement_board.position_selected(player_id, (x,y,offset), settlement_type)
+    return json.dumps(result)
 
 
 if __name__ == "__main__":

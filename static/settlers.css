@@ -47,9 +47,6 @@
 	 background: inherit;
 	 content: '';
 }
- .hex:hover {
-	 cursor: pointer;
-}
  .hex:before {
 	 transform: rotate(60deg);
 }
@@ -113,11 +110,6 @@
 .hex .road.target {
 	 background-color: transparent;
 	 position: absolute;
-	 /* border: 2px dashed rgb(22, 103, 137); */
-}
-.hex .road.target.selectable:hover {
-	 background-color: var(--hover-target-color);
-	 border: 1px solid var(--hover-target-color);
 }
 .hex .road.l {
 	 right: 33px;
@@ -326,11 +318,6 @@
  .hex .settlement.target {
     border: none;
 }
- .hex .settlement.target.selectable:hover {
-	 background-color: var(--hover-target-color);
-	 border: 1px solid var(--hover-target-color);
-
-}
  .hex .settlement.target::before {
 	 display: none;
 }
@@ -344,7 +331,12 @@
 }
 
 .hex .target.selectable {
+	 background-color: var(--hover-target-color);
+	 border: 1px solid var(--hover-target-color);
+}
+.hex .selectable:hover {
 	 border: 2px solid white;
+	 cursor: pointer;
 }
 /* end settlements */
 /* ----------------------------------------- */
