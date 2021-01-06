@@ -301,14 +301,14 @@
 /* end numbers */
 /* ----------------------------------------- */
 /* ----------------------------------------- */
-/* begin houses */
- .hex .house {
+/* begin settlements */
+ .hex .settlement {
 	 height: 20px;
 	 width: 20px;
 	 position: absolute;
 	 z-index: 800;
 }
- .hex .house::before {
+ .hex .settlement::before {
 	 width: 0;
 	 height: 0;
 	 border-style: solid;
@@ -316,34 +316,34 @@
 	 content: "";
 	 position: absolute;
 }
-/* roof of the house */
- .hex .house::before {
+/* roof of the settlement */
+ .hex .settlement::before {
 	 top: 4px;
 	 left: 14px;
 	 border-width: 0 12px 12px 12px;
 	 border-color: transparent transparent #000 transparent;
 }
- .hex .house.target {
+ .hex .settlement.target {
     border: none;
 	 /* border: 2px dashed black; */
 }
- .hex .house.target:hover {
+ .hex .settlement.target:hover {
 	 background-color: var(--hover-target-color);
 	 border: 1px solid var(--hover-target-color);
 
 }
- .hex .house.target::before {
+ .hex .settlement.target::before {
 	 display: none;
 }
- .hex .house.t {
+ .hex .settlement.t {
 	 top: 55px;
 	 left: 100px;
 }
- .hex .house.tl {
+ .hex .settlement.tl {
 	 top: -15px;
 	 left: 65px;
 }
-/* end houses */
+/* end settlements */
 /* ----------------------------------------- */
 /* ----------------------------------------- */
 /* begin cities */
@@ -605,7 +605,7 @@
 /* ----------------------------------------- */
 /* begin colors */
 
-.hex .house.blue {
+.hex .settlement.blue {
     background-color: var(--player1-color);
 }
 
@@ -613,7 +613,7 @@
     background-color: var(--player1-color);
 }
 
-.hex .house.red {
+.hex .settlement.red {
     background-color: var(--player2-color);
 }
 
