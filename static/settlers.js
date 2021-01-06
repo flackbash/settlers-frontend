@@ -4,29 +4,40 @@ var basePath = window.location.pathname.replace(/\/$/, "") + "/";
 var URL_DRAW_RESOURCE = basePath + "draw_resource_card";
 var URL_DISCARD_RESOURCE = basePath + "discard_resource_card";
 var URL_ROLE_DICE = basePath + "get_dice_roll";
+var URL_ROAD_POSITION_CLICKED = basePath + "road_position_clicked";
+var URL_SETTLEMENT_POSITION_CLICKED = basePath + "settlement_position_clicked";
 
 // Player variables
 // TODO: Adjust player id. Where to store it?
 var player_id = "p1";
 
-// Token placement variables: 1: road, 2: settlement, 3: city
-var token_selected = 0;
+// Token placement variables
+var token_selected = '';  // one of: road, settlement, city
 
 /*
  * Select a token.
  */
 function toggleSelectToken(type, element) {
-  // Remove class 'selected' from all tokens
-  $('.token').each(function(i, obj){
-    $(obj).removeClass('selected');
-  });
+  if (token_selected) {
+    // Remove class 'selected' from previously selected token
+    $('.token.' + token_selected).each(function(i, obj){
+      $(obj).removeClass('selected');
+    });
+    // Remove class 'selectable' from all targets of previously selected type
+    $('.target.' + token_selected).each(function(i, obj){
+      $(obj).removeClass('selectable');
+    });
+  }
 
   // Toggle selection
   if (token_selected != type) {
     token_selected = type;
     $(element).addClass('selected');
+      $('.target.' + type).each(function(i, obj){
+        $(obj).addClass('selectable');
+      });
   } else {
-    token_selected = 0;
+    token_selected = '';
   }
 }
 

@@ -35,13 +35,13 @@ and modified.
             Tokens
           </div>
           <div class='tokens'>
-            <div class='token road' onclick='toggleSelectToken(1, this)'>
+            <div class='token road' onclick='toggleSelectToken("road", this)'>
               <div class='number'>15</div>
             </div>
-            <div class='token settlement' onclick='toggleSelectToken(2, this)'>
+            <div class='token settlement' onclick='toggleSelectToken("settlement", this)'>
               <div class='number'>5</div>
             </div>
-            <div class='token city' onclick='toggleSelectToken(3, this)'>
+            <div class='token city' onclick='toggleSelectToken("city", this)'>
               <div class='number'>4</div>
             </div>
           </div>
@@ -131,47 +131,39 @@ and modified.
         </li>
         <li class='hex wheat'>
           <!-- ROAD TARGETS -->
-          <div class='road target l'></div>
-          <div class='road target tl'></div>
-          <div class='road target tr'></div>
+          <div class='road l'></div>
+          <div class='road tl'></div>
+          <div class='road tr'></div>
           <!-- SETTLEMENT TARGETS -->
           <div class='settlement t target'></div>
           <div class='settlement tl target'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number two'></div>
-          <div class='road tr'></div>
-          <div class='road l'></div>
-          <div class='road tl'></div>
         </li>
         <li class='hex wood'>
           <!-- ROAD TARGETS -->
-          <div class='road target l'></div>
-          <div class='road target tl'></div>
-          <div class='road target tr'></div>
+          <div class='road l'></div>
+          <div class='road tl'></div>
+          <div class='road tr'></div>
           <!-- SETTLEMENT TARGETS -->
           <div class='settlement t target'></div>
           <div class='settlement tl target'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number three'></div>
-          <div class='road tl'></div>
-          <div class='road l'></div>
-          <div class='road tr'></div>
         </li>
         <li class='hex wheat'>
           <!-- ROAD TARGETS -->
           <div class='road target l'></div>
-          <div class='road target tl'></div>
-          <div class='road target tr'></div>
+          <div class='road tl'></div>
+          <div class='road tr'></div>
           <!-- SETTLEMENT TARGETS -->
           <div class='settlement t target'></div>
           <div class='settlement tl target'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number three'></div>
-          <div class='road tl'></div>
-          <div class='road tr'></div>
 
         </li>
         <li class='hex water'>
@@ -188,14 +180,13 @@ and modified.
           <!-- ROAD TARGETS -->
           <div class='road target l'></div>
           <div class='road target tl'></div>
-          <div class='road target tr'></div>
+          <div class='road tr'></div>
           <!-- SETTLEMENT TARGETS -->
           <div class='settlement t target'></div>
           <div class='settlement tl target'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number four'></div>
-          <div class='road tr'></div>
         </li>
         <li class='hex sheep'>
           <!-- ROAD TARGETS -->
@@ -204,11 +195,10 @@ and modified.
           <div class='road target tr'></div>
           <!-- SETTLEMENT TARGETS -->
           <div class='settlement t target'></div>
-          <div class='settlement tl target'></div>
+          <div class='settlement tl red'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number four'></div>
-          <div class='settlement tl red'></div>
         </li>
         <li class='hex wood'>
           <!-- ROAD TARGETS -->
@@ -228,12 +218,11 @@ and modified.
           <div class='road target tl'></div>
           <div class='road target tr'></div>
           <!-- SETTLEMENT TARGETS -->
-          <div class='settlement t target'></div>
+          <div class='settlement t blue'></div>
           <div class='settlement tl target'></div>
           <!-- BANDIT TARGET -->
           <!-- NUMBER -->
           <div class='number five'></div>
-          <div class='settlement t blue'></div>
         </li>
         <li class='hex water'>
           <!-- ROAD TARGETS -->
