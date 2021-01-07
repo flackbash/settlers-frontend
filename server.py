@@ -15,7 +15,6 @@ players = ["p1", "p2", "p3"]
 table = Table(players)
 street_board = StreetBoard(players)
 settlement_board = SettlementBoard(players)
-dice_result = (0,0)
 
 
 @app.route("/")
@@ -67,7 +66,7 @@ def select_road_position():
     x = int(request.args.get("x"))
     y = int(request.args.get("y"))
     offset = request.args.get("offset")
-    result = street_board.position_selected(player_id, (x,y,offset))
+    result = street_board.position_selected(player_id, (x, y, offset))
     return json.dumps(result)
 
 
@@ -78,7 +77,7 @@ def select_settlement_position():
     y = int(request.args.get("y"))
     offset = request.args.get("offset")
     settlement_type = request.args.get("type")
-    result = settlement_board.position_selected(player_id, (x,y,offset), settlement_type)
+    result = settlement_board.position_selected(player_id, (x, y, offset), settlement_type)
     return json.dumps(result)
 
 
