@@ -57,14 +57,10 @@ function drawResourceCard(type) {
   $.getJSON(url, function(jsonObj) {
     if (jsonObj.length == 0) return;
 
-    var success = jsonObj["success"];
-
-    if (success == "true") {
-        // Increase the resource card number of the corresponding type by one
-        var numberObject = $('.resource-card.' + type + ' .number');
-        var currNumber = parseInt(numberObject.html());
-        numberObject.html(currNumber + 1);
-    }
+    // Display new amount of the resource card
+    var newAmount = jsonObj[type];
+    var numberObject = $('.resource-card.' + type + ' .number');
+    numberObject.html(newAmount);
   });
 }
 
@@ -80,16 +76,10 @@ function discardResourceCard(type) {
   $.getJSON(url, function(jsonObj) {
     if (jsonObj.length == 0) return;
 
-    var success = jsonObj["success"];
-
-    if (success == "true") {
-        // Decrease the resource card number of the corresponding type by one
-        var numberObject = $('.resource-card.' + type + ' .number');
-        var currNumber = parseInt(numberObject.html());
-        if (currNumber > 0) {
-            numberObject.html(currNumber - 1);
-        }
-    }
+    // Display new amount of the resource card
+    var newAmount = jsonObj[type];
+    var numberObject = $('.resource-card.' + type + ' .number');
+    numberObject.html(newAmount);
   });
 }
 
