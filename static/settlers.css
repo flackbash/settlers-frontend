@@ -411,6 +411,7 @@
     margin: 5px;
     padding: 2px;
     background-color: var(--player2-color);
+    color: white;
 }
 
 /* Tokens */

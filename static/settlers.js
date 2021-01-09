@@ -9,16 +9,19 @@ var URL_ROLE_DICE = basePath + "get_dice_roll";
 var URL_ROAD_POSITION_CLICKED = basePath + "select_road_position";
 var URL_SETTLEMENT_POSITION_CLICKED = basePath + "select_settlement_position";
 
+// Possible player colors
+var playerColorNames = ["blue", "red", "yellow", "green"]
+var playerColors = ["#0a1eb0", "#6f1515", "#f6b20c", "#7cf022"]
+
 // Player variables
 // TODO: Adjust player id and color. Where to store it and how to retrieve it?
 var playerId = "p1";
-var playerColor = "blue";
+var playerIndex = 0;
+var playerColorName = playerColorNames[playerIndex];
+var playerColor = playerColors[playerIndex];
 
 // Token placement variables
 var selectedToken = '';  // one of: road, village, city
-
-// Possible player colors
-var playerColorList = ["blue", "red", "yellow", "green"]
 
 
 /*
@@ -208,6 +211,11 @@ function getCoordinates(element) {
 }
 
 $(document).ready(function(){
+  // Adjust sideboard colors to player color
+  $(".section-header").css("background-color", playerColor);
+  if (playerColorName == "yellow") {
+    $(".section-header").css("color", "black");
+  }
 
   // OnClickListener for roads (targets and existing roads)
   $(".hex .road").click(function(){
@@ -234,11 +242,11 @@ $(document).ready(function(){
       var roadObj = $("#" + hexId).children(".road." + resOffset)
       if (resPlayerId != null) {
         roadObj.removeClass("target");
-        roadObj.addClass(playerColor);
+        roadObj.addClass(playerColorName);
       } else {
         roadObj.addClass("target");
         roadObj.addClass("selectable");
-        playerColorList.forEach(function(color) {
+        playerColorNames.forEach(function(color) {
           roadObj.removeClass(color)
         });
       }
@@ -272,7 +280,7 @@ $(document).ready(function(){
       var settlementObj = $("#" + hexId).children(".settlement." + resOffset)
       if (resPlayerId != null) {
         settlementObj.removeClass("target");
-        settlementObj.addClass(playerColor);
+        settlementObj.addClass(playerColorName);
         if (resType == "city") {
           settlementObj.addClass("city");
         } else {
@@ -282,7 +290,7 @@ $(document).ready(function(){
         settlementObj.addClass("target");
         settlementObj.addClass("selectable");
         settlementObj.removeClass("city");
-        playerColorList.forEach(function(color) {
+        playerColorNames.forEach(function(color) {
           settlementObj.removeClass(color)
         });
       }
