@@ -456,26 +456,6 @@
     border: 3px solid black;
 }
 
-.tokens .number {
-    line-height: 30px;
-    text-align: center;
-    z-index: 200;
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    border: 1px solid black;
-    background-color: white;
-    font-size: 20px;
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
-
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
 /* Dice */
 .dice {
     display:flex;
@@ -515,10 +495,6 @@
     border: 3px solid transparent;
 }
 
-.draw-pile-row .resource-card:hover {
-    border: 3px solid white;
-}
-
 /* Resource cards */
 .resource-card-row {
     display: flex;
@@ -529,12 +505,16 @@
     white-space:nowrap;
     height: 100px;
     width: 60px;
-    border: 1px solid transparent;
+    border: 3px solid transparent;
     border-radius: 5px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
+}
+
+.resource-card:hover {
+    border: 3px solid white;
 }
 
 .resource-card.grain {
@@ -563,48 +543,49 @@
 }
 .resource-card.knight {
     background-color: black;
+    background-size: cover;
+    background-image: url(img/knight.png);
 }
-.resource-card.point {
+.resource-card.victory-point {
     background-color: black;
+    background-size: cover;
+    background-image: url(img/victory-point.png);
 }
 .resource-card.monopoly {
     background-color: black;
+    background-size: cover;
+    background-image: url(img/monopoly.png);
 }
 .resource-card.progress {
     background-color: black;
+    background-size: cover;
+    background-image: url(img/progress.png);
 }
-.resource-card.roadwords {
+.resource-card.roadworks {
     background-color: black;
+    background-size: cover;
+    background-image: url(img/roadworks.png);
 }
 
-.resource-card .number {
-    line-height: 44px;
+.side-board .number {
+    line-height: 30px;
     text-align: center;
     z-index: 200;
-    height: 45px;
-    width: 45px;
-    border-radius: 45px;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    border: 1px solid black;
     background-color: white;
-    font-size: 30px;
+    font-size: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    cursor: pointer;
-    border: 3px solid transparent
+    bottom: 5%;
+    right: 5%;
 
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
-
-.resource-card .number:hover {
-    border: 3px solid black;
-}
-
 /* end side board */
 /* ----------------------------------------- */
 /* ----------------------------------------- */
