@@ -347,7 +347,6 @@
 	 width: 30px;
 	 position: absolute;
 	 z-index: 800;
-	 background-color: var(--player1-color);
 }
  .hex .city::before {
 	 width: 0;
