@@ -59,7 +59,7 @@ and modified.
           <div class='draw-pile-row'>
             <div class='resource-card sheep' onclick='drawResourceCard("sheep")'></div>
             <div class='resource-card ore' onclick='drawResourceCard("ore")'></div>
-            <div class='resource-card development' onclick='drawResourceCard("development")'></div>
+            <div class='resource-card development' onclick='drawDevelopmentCard()'></div>
           </div>
         </div>
 
@@ -68,37 +68,37 @@ and modified.
               Player Resources
             </div>
             <div class='resource-card-row'>
-              <div class='resource-card wood'>
-                <div class='number' onclick='discardResourceCard("wood")'>0</div>
+              <div class='resource-card wood' onclick='discardResourceCard("wood")'>
+                <div class='number'>0</div>
               </div>
-              <div class='resource-card clay'>
-                <div class='number' onclick='discardResourceCard("clay")'>0</div>
+              <div class='resource-card clay' onclick='discardResourceCard("clay")'>
+                <div class='number'>0</div>
               </div>
-              <div class='resource-card grain'>
-                <div class='number' onclick='discardResourceCard("grain")'>0</div>
+              <div class='resource-card grain' onclick='discardResourceCard("grain")'>
+                <div class='number'>0</div>
               </div>
-              <div class='resource-card sheep'>
-                <div class='number' onclick='discardResourceCard("sheep")'>0</div>
+              <div class='resource-card sheep' onclick='discardResourceCard("sheep")'>
+                <div class='number'>0</div>
               </div>
-              <div class='resource-card ore'>
-                <div class='number' onclick='discardResourceCard("ore")'>0</div>
+              <div class='resource-card ore' onclick='discardResourceCard("ore")'>
+                <div class='number'>0</div>
               </div>
             </div>
 
             <div class='resource-card-row'>
-              <div class='resource-card knight'>
+              <div class='resource-card knight' onclick='discardDevelopmentCard("knight")'>
                 <div class='number'>0</div>
               </div>
-              <div class='resource-card point'>
+              <div class='resource-card victory-point' onclick='discardDevelopmentCard("victory-point")'>
                 <div class='number'>0</div>
               </div>
-              <div class='resource-card monopoly'>
+              <div class='resource-card monopoly' onclick='discardDevelopmentCard("monopoly")'>
                 <div class='number'>0</div>
               </div>
-              <div class='resource-card progress'>
+              <div class='resource-card progress' onclick='discardDevelopmentCard("progress")'>
                 <div class='number'>0</div>
               </div>
-              <div class='resource-card roadwords'>
+              <div class='resource-card roadworks' onclick='discardDevelopmentCard("roadworks")'>
                 <div class='number'>0</div>
               </div>
             </div>

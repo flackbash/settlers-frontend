@@ -2,7 +2,9 @@
 // URL building
 var basePath = window.location.pathname.replace(/\/$/, "") + "/";
 var URL_DRAW_RESOURCE = basePath + "draw_resource_card";
+var URL_DRAW_DEVELOPMENT = basePath + "draw_development_card";
 var URL_DISCARD_RESOURCE = basePath + "discard_resource_card";
+var URL_DISCARD_DEVELOPMENT = basePath + "play_development_card";
 var URL_ROLE_DICE = basePath + "get_dice_roll";
 var URL_ROAD_POSITION_CLICKED = basePath + "select_road_position";
 var URL_SETTLEMENT_POSITION_CLICKED = basePath + "select_settlement_position";
@@ -65,6 +67,26 @@ function drawResourceCard(type) {
 }
 
 /*
+ * Send request to server to draw a development card and display result.
+ */
+function drawDevelopmentCard() {
+  var params = {"player_id": playerId};
+  params = $.param(params);
+
+  var url = URL_DRAW_DEVELOPMENT + "?" + params;
+
+  $.getJSON(url, function(jsonObj) {
+    if (jsonObj.length == 0) return;
+
+    // Display new amount of the development card
+    var type = Object.keys(jsonObj)[0];
+    var newAmount = jsonObj[type];
+    var numberObject = $('.resource-card.' + type + ' .number');
+    numberObject.html(newAmount);
+  });
+}
+
+/*
  * Send request to server to discard a resource card and display result.
  */
 function discardResourceCard(type) {
@@ -77,6 +99,25 @@ function discardResourceCard(type) {
     if (jsonObj.length == 0) return;
 
     // Display new amount of the resource card
+    var newAmount = jsonObj[type];
+    var numberObject = $('.resource-card.' + type + ' .number');
+    numberObject.html(newAmount);
+  });
+}
+
+/*
+ * Send request to server to discard a development card and display result.
+ */
+function discardDevelopmentCard(type) {
+  var params = {"type": type, "player_id": playerId};
+  params = $.param(params);
+
+  var url = URL_DISCARD_DEVELOPMENT + "?" + params;
+
+  $.getJSON(url, function(jsonObj) {
+    if (jsonObj.length == 0) return;
+
+    // Display new amount of the development card
     var newAmount = jsonObj[type];
     var numberObject = $('.resource-card.' + type + ' .number');
     numberObject.html(newAmount);
