@@ -15,37 +15,11 @@ var playerId = "p1";
 var playerColor = "blue";
 
 // Token placement variables
-var selectedToken = '';  // one of: road, settlement, city
+var selectedToken = '';  // one of: road, village, city
 
 // Possible player colors
 var playerColorList = ["blue", "red", "yellow", "green"]
 
-/*
- * Select a token.
- */
-function toggleSelectToken(type, element) {
-  if (selectedToken) {
-    // Remove class 'selected' from previously selected token
-    $('.token.' + selectedToken).each(function(i, obj){
-      $(obj).removeClass('selected');
-    });
-    // Remove class 'selectable' from all targets of previously selected type
-    $('.hex .' + selectedToken).each(function(i, obj){
-      $(obj).removeClass('selectable');
-    });
-  }
-
-  // Toggle selection
-  if (selectedToken != type) {
-    selectedToken = type;
-    $(element).addClass('selected');
-      $('.hex .' + type).each(function(i, obj){
-        $(obj).addClass('selectable');
-      });
-  } else {
-    selectedToken = '';
-  }
-}
 
 /*
  * Send request to server to draw a resource card and display result.
@@ -176,6 +150,43 @@ function getDieImageUrl(number) {
     return baseUrl + filename;
 }
 
+/*
+ * Select a token.
+ */
+function toggleSelectToken(type, element) {
+  var prevSelectedTargetClass = selectedToken;
+  if (selectedToken == 'village' || selectedToken == 'city') {
+    prevSelectedTargetClass = 'settlement';
+  }
+
+  var newSelectedTargetClass = type;
+  if (type == 'village' || type == 'city') {
+    newSelectedTargetClass = 'settlement';
+  }
+
+  if (selectedToken) {
+    // Remove class 'selected' from previously selected token
+    $('.token.' + selectedToken).each(function(i, obj){
+      $(obj).removeClass('selected');
+    });
+    // Remove class 'selectable' from all targets of previously selected type
+    $('.hex .' + prevSelectedTargetClass).each(function(i, obj){
+      $(obj).removeClass('selectable');
+    });
+  }
+
+  // Toggle selection
+  if (selectedToken != type) {
+    selectedToken = type;
+    $(element).addClass('selected');
+      $('.hex .' + newSelectedTargetClass).each(function(i, obj){
+        $(obj).addClass('selectable');
+      });
+  } else {
+    selectedToken = '';
+  }
+}
+
 function getCoordinates(element) {
   // Get x and y coordinates
   var id = $(element).parent().attr('id');
@@ -217,17 +228,14 @@ $(document).ready(function(){
       var resOffset = jsonObj["offset"];
       // TODO: Deal with player id
       var resPlayerId = jsonObj["player_id"];
-      console.log("result: " + resX + ", " + resY + ", " + resOffset + ", " + resPlayerId);
 
       // Display road or road target at specified position.
       var hexId = resX + "_" + resY;
       var roadObj = $("#" + hexId).children(".road." + resOffset)
       if (resPlayerId != null) {
-        console.log("Add road");
         roadObj.removeClass("target");
         roadObj.addClass(playerColor);
       } else {
-        console.log("Remove road");
         roadObj.addClass("target");
         roadObj.addClass("selectable");
         playerColorList.forEach(function(color) {
@@ -239,16 +247,14 @@ $(document).ready(function(){
 
   // OnClickListener for settlements (targets and existing settlements)
   $(".hex .settlement").click(function(){
-    if (selectedToken != "settlement" && selectedToken != "city") {
+    if (selectedToken != "village" && selectedToken != "city") {
       return;
     }
 
     // Retrieve coordinates of the clicked object and prepare parameters
     var params = getCoordinates(this);
     params["player_id"] = playerId;
-    // TODO: think about how to differentiate between settlement and village
-    params["type"] =  "village";  // selectedToken;
-    console.log("result: " + params["x"] + ", " + params["offset"]);
+    params["type"] =  selectedToken
     params = $.param(params);
 
     var url = URL_SETTLEMENT_POSITION_CLICKED + "?" + params;
@@ -260,21 +266,24 @@ $(document).ready(function(){
       // TODO: Deal with player id
       var resPlayerId = jsonObj["player_id"];
       var resType = jsonObj["type"];
-      console.log("result: " + resX + ", " + resY + ", " + resOffset + ", " + resPlayerId + ", " + resType);
 
       // Display settlement/city or target at specified position.
       var hexId = resX + "_" + resY;
-      var roadObj = $("#" + hexId).children(".settlement." + resOffset)
+      var settlementObj = $("#" + hexId).children(".settlement." + resOffset)
       if (resPlayerId != null) {
-        console.log("Add settlement");
-        roadObj.removeClass("target");
-        roadObj.addClass(playerColor);
+        settlementObj.removeClass("target");
+        settlementObj.addClass(playerColor);
+        if (resType == "city") {
+          settlementObj.addClass("city");
+        } else {
+          settlementObj.removeClass("city");
+        }
       } else {
-        console.log("Remove settlement");
-        roadObj.addClass("target");
-        roadObj.addClass("selectable");
+        settlementObj.addClass("target");
+        settlementObj.addClass("selectable");
+        settlementObj.removeClass("city");
         playerColorList.forEach(function(color) {
-          roadObj.removeClass(color)
+          settlementObj.removeClass(color)
         });
       }
     });

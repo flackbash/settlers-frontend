@@ -439,8 +439,8 @@
     background-image: url(img/road.png);
 }
 
-.token.settlement {
-    background-image: url(img/settlement.png);
+.token.village {
+    background-image: url(img/village.png);
 }
 
 .token.city {
