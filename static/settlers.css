@@ -603,3 +603,31 @@ ol.odd {
 .clear {
     clear: both;
 }
+
+/* city roof colors */
+.hex .blue.city::before {
+    border-color: transparent transparent var(--player1-color) transparent;
+}
+.hex .red.city::before {
+    border-color: transparent transparent var(--player2-color) transparent;
+}
+.hex .yellow.city::before {
+    border-color: transparent transparent var(--player3-color) transparent;
+}
+.hex .green.city::before {
+    border-color: transparent transparent var(--player4-color) transparent;
+}
+
+/* village roof colors */
+.hex .blue.settlement::before {
+    border-color: transparent transparent var(--player1-color) transparent;
+}
+.hex .red.settlement::before {
+    border-color: transparent transparent var(--player2-color) transparent;
+}
+.hex .yellow.settlement::before {
+    border-color: transparent transparent var(--player3-color) transparent;
+}
+.hex .green.settlement::before {
+    border-color: transparent transparent var(--player4-color) transparent;
+}
