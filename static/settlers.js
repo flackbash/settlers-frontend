@@ -1,5 +1,5 @@
 // ---------------------- Global variables -------------------------------------
-// URL building
+// URLs
 var basePath = window.location.pathname.replace(/\/$/, "") + "/";
 var URL_DRAW_RESOURCE = basePath + "draw_resource_card";
 var URL_DRAW_DEVELOPMENT = basePath + "draw_development_card";
@@ -21,16 +21,16 @@ var playerColorName = playerColorNames[playerIndex];
 var playerColor = playerColors[playerIndex];
 
 // Token placement variables
-var selectedToken = '';  // one of: road, village, city
+var selectedToken = '';  // empty or one of: {road, village, city}
 
 
+// ---------------------- Functions -------------------------------------------
 /*
- * Send request to server to draw a resource card and display result.
+ * Send request to server to draw a resource card and display the result.
  */
 function drawResourceCard(type) {
   var params = {"type": type, "player_id": playerId};
   params = $.param(params);
-
   var url = URL_DRAW_RESOURCE + "?" + params;
 
   $.getJSON(url, function(jsonObj) {
@@ -44,12 +44,11 @@ function drawResourceCard(type) {
 }
 
 /*
- * Send request to server to draw a development card and display result.
+ * Send request to server to draw a development card and display the result.
  */
 function drawDevelopmentCard() {
   var params = {"player_id": playerId};
   params = $.param(params);
-
   var url = URL_DRAW_DEVELOPMENT + "?" + params;
 
   $.getJSON(url, function(jsonObj) {
@@ -64,12 +63,11 @@ function drawDevelopmentCard() {
 }
 
 /*
- * Send request to server to discard a resource card and display result.
+ * Send request to server to discard a resource card and display the result.
  */
 function discardResourceCard(type) {
   var params = {"type": type, "player_id": playerId};
   params = $.param(params);
-
   var url = URL_DISCARD_RESOURCE + "?" + params;
 
   $.getJSON(url, function(jsonObj) {
@@ -83,12 +81,11 @@ function discardResourceCard(type) {
 }
 
 /*
- * Send request to server to discard a development card and display result.
+ * Send request to server to discard a development card and display the result.
  */
 function discardDevelopmentCard(type) {
   var params = {"type": type, "player_id": playerId};
   params = $.param(params);
-
   var url = URL_DISCARD_DEVELOPMENT + "?" + params;
 
   $.getJSON(url, function(jsonObj) {
@@ -102,7 +99,7 @@ function discardDevelopmentCard(type) {
 }
 
 /*
- * Send request to server to role the dice and display result.
+ * Send request to server to role the dice and display the result.
  */
 function roleDice() {
   var url = URL_ROLE_DICE;
@@ -116,7 +113,6 @@ function roleDice() {
     // Display the dice roll
     var die1 = $('#die1');
     var img1 = getDieImageUrl(result1);
-    console.log(img1);
     die1.css('background-image', 'url(' + img1 + ')');
     var die2 = $('#die2');
     var img2 = getDieImageUrl(result2);
@@ -154,7 +150,7 @@ function getDieImageUrl(number) {
 }
 
 /*
- * Select a token.
+ * Select a token (road / village / city) in the sidebar.
  */
 function toggleSelectToken(type, element) {
   var prevSelectedTargetClass = selectedToken;
@@ -190,6 +186,9 @@ function toggleSelectToken(type, element) {
   }
 }
 
+/*
+ * Retrieve coordinates of a settlement- (village/city) or road object as {x, y, offset}.
+ */
 function getCoordinates(element) {
   // Get x and y coordinates
   var id = $(element).parent().attr('id');
@@ -209,6 +208,7 @@ function getCoordinates(element) {
 
   return {"x": x, "y": y, "offset": offset};
 }
+
 
 $(document).ready(function(){
   // Adjust sideboard colors to player color
