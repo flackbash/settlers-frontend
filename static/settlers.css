@@ -631,3 +631,48 @@ ol.odd {
 .hex .green.settlement::before {
     border-color: transparent transparent var(--player4-color) transparent;
 }
+
+/* end colors */
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/* begin lobby */
+
+.lobby-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+}
+.lobby-container .header {
+    padding-top: 5%;
+    margin: auto;
+    width: 25%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.player-id {
+    margin: auto;
+    width: 25%;
+    padding-top: 7%;
+    height: 2.5em;
+}
+.player-id input {
+    width: 80%;
+    height: 100%;
+
+}
+.player-id button {
+    height: 100%;
+}
+
+.start-game {
+    margin: auto;
+    width: 25%;
+    height: 3em;
+    padding-top: 3em;
+}
+.start-game button {
+    width: 100%;
+    height: 100%;
+}

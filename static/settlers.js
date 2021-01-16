@@ -1,6 +1,7 @@
 // ---------------------- Global variables -------------------------------------
 // URLs
 var basePath = window.location.pathname.replace(/\/$/, "") + "/";
+var URL_SET_PLAYER_NAME = basePath + "set_player_name";
 var URL_DRAW_RESOURCE = basePath + "draw_resource_card";
 var URL_DRAW_DEVELOPMENT = basePath + "draw_development_card";
 var URL_DISCARD_RESOURCE = basePath + "discard_resource_card";
@@ -14,7 +15,6 @@ var playerColorNames = ["blue", "red", "yellow", "green"]
 var playerColors = ["#0a1eb0", "#6f1515", "#f6b20c", "#7cf022"]
 
 // Player variables
-// TODO: Adjust player id and color. Where to store it and how to retrieve it?
 var playerId = "p1";
 var playerIndex = 0;
 var playerColorName = playerColorNames[playerIndex];
@@ -24,7 +24,39 @@ var playerColor = playerColors[playerIndex];
 var selectedToken = '';  // empty or one of: {road, village, city}
 
 
-// ---------------------- Functions -------------------------------------------
+// ---------------- Lobby Functions -------------------------------------------
+
+/*
+ * Submit the player name and receive player color.
+ */
+function submitPlayerName() {
+  var chosenPlayerName = $(".player-id input").val()
+  var params = {"player_id": chosenPlayerName};
+  params = $.param(params);
+  var url = URL_SET_PLAYER_NAME + "?" + params;
+
+  $.getJSON(url, function(jsonObj) {
+    if (jsonObj.length == 0) return;
+    // TODO: Handle case that result is empty (= invalid player name)
+
+    playerId = chosenPlayerName;
+    playerIndex = jsonObj["player-index"];
+    playerColorName = playerColorNames[playerIndex];
+    playerColor = playerColors[playerIndex];
+    // TODO: Display player color
+  });
+}
+
+/*
+ * Start the game: Send request to server and draw resulting world.
+ */
+function startGame() {
+  console.log("Start game");
+  // TODO: Implement
+}
+
+// ---------------- Ingame Functions ------------------------------------------
+
 /*
  * Send request to server to draw a resource card and display the result.
  */
